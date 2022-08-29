@@ -8,3 +8,8 @@
 .textArea::placeholder {
   text-align: center;
 }
+
+.textArea:disabled {
+  background-color: #fff;
+  color: #000;
+}

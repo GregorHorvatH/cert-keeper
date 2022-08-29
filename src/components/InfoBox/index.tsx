@@ -23,6 +23,7 @@ const InfoBox: FC<InfoBoxProps> = ({ cert }) => {
   return (
     <textarea
       className={styles.textArea}
+      disabled={true}
       rows={10}
       value={value}
       placeholder='Виберіть сертифікат, щоб переглянути інформацію'

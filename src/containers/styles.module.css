@@ -6,9 +6,9 @@
 
 .col {
   display: flex;
+  overflow: hidden;
   flex-direction: column;
-  overflow: auto;
   padding: 20px;
-  flex: 1;
   row-gap: 20px;
+  flex: 1;
 }
