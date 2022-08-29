@@ -28,6 +28,7 @@ const App: FC = () => {
 
   const handleUserClick = useCallback(
     (cert: string) => {
+      setIsAddMode(false);
       setSelectedIdx(certs.indexOf(cert));
       setSelectedCert(decodeCert(base64ToString(cert)));
     },
