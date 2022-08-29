@@ -1,14 +1,14 @@
 import { FC } from 'react';
+import { FileUploader } from 'react-drag-drop-files';
 import { stringToBase64 } from '../../utils/decodeCert';
-// import styles from './styles.module.css';
+import styles from './styles.module.css';
 
 interface FileUploadProps {
   onFileLoad: (base64File: string) => void;
 }
 
 const FileUpload: FC<FileUploadProps> = ({ onFileLoad }) => {
-  const onFileUpload = (e: any) => {
-    const file = e.target.files[0];
+  const onFileUpload = (file: any) => {
     const reader = new FileReader();
 
     reader.onload = (e: any) => {
@@ -18,7 +18,13 @@ const FileUpload: FC<FileUploadProps> = ({ onFileLoad }) => {
     reader.readAsBinaryString(file);
   };
 
-  return <input type='file' onInput={onFileUpload} />;
+  return (
+    <FileUploader
+      classes={styles.fileUploader}
+      handleChange={onFileUpload}
+      label='Перетягніть файл сертифіката у поле'
+    />
+  );
 };
 
 export default FileUpload;
