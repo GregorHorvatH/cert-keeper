@@ -21,14 +21,16 @@ const InfoBox: FC<InfoBoxProps> = ({ isAddMode }) => {
         throw 'Неправильна структура конверта сертифіката (очікується SEQUENCE)';
       }
 
-      console.log('--- 1 ---');
-      for (let i = 0; i < result.sub[0].sub[5].sub.length; i++) {
-        const item0 = result.sub[0].sub[5].sub[i].sub[0].sub[0];
-        const item1 = result.sub[0].sub[5].sub[i].sub[0].sub[1];
-        const code = item0.content().match(reHex)[0].replace(/\n/, '');
+      [3, 5].forEach((key) => {
+        console.log(`--- ${key} ---`);
+        for (let i = 0; i < result.sub[0].sub[key].sub.length; i++) {
+          const item0 = result.sub[0].sub[key].sub[i].sub[0].sub[0];
+          const item1 = result.sub[0].sub[key].sub[i].sub[0].sub[1];
+          const code = item0.content().match(reHex)[0].replace(/\n/, '');
 
-        console.log(`${code}: ${item1.content()}`);
-      }
+          console.log(`${code}: ${item1.content()}`);
+        }
+      });
 
       // console.dir(item0);
       // console.log(item0.typeName());
