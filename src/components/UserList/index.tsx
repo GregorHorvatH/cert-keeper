@@ -1,10 +1,23 @@
+import { FC } from 'react';
+import UserItem from '../UserItem';
 import styles from './styles.module.css';
 
-const UserList = () => (
+interface UserListProps {
+  certs: string[];
+  selected: number;
+  onClick: (cert: string) => void;
+}
+
+const UserList: FC<UserListProps> = ({ certs, selected, onClick }) => (
   <ul className={styles.userList}>
-    <li>item 1</li>
-    <li>item 2</li>
-    <li>item 3</li>
+    {certs.map((cert, idx) => (
+      <UserItem
+        key={cert}
+        cert={cert}
+        isActive={idx === selected}
+        onClick={onClick}
+      />
+    ))}
   </ul>
 );
 

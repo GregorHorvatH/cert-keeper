@@ -1,55 +1,30 @@
 import { FC } from 'react';
-import ASN1 from '../../utils/asn1';
+import moment from 'moment';
+import { CertData } from '../../interfaces';
 import styles from './styles.module.css';
 
-const reHex = /[a-zA-Z]+\n/;
-
 interface InfoBoxProps {
-  isAddMode: boolean;
+  cert: CertData;
 }
 
-const InfoBox: FC<InfoBoxProps> = ({ isAddMode }) => {
-  const onFileUpload = (e: any) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
+const InfoBox: FC<InfoBoxProps> = ({ cert }) => {
+  const { user = {}, center = {}, validFrom = '', validTo = '' } = cert;
+  const { commonName: userCommonName } = user;
+  const { commonName: centerCommonName } = center;
 
-    reader.onloadend = (e: any) => {
-      const certData = e.target.result;
-      const result = ASN1.decode(certData);
+  const formattedFrom = moment(validFrom, 'YYYY-MM-DD').format('YYYY-MM-DD');
+  const formattedTo = moment(validTo, 'YYYY-MM-DD').format('YYYY-MM-DD');
 
-      if (result.typeName() !== 'SEQUENCE') {
-        throw 'Неправильна структура конверта сертифіката (очікується SEQUENCE)';
-      }
+  const value =
+    userCommonName || centerCommonName
+      ? `Common Name: ${userCommonName}\nIssuer CN: ${centerCommonName}\nValid from: ${formattedFrom}\nValidTo: ${formattedTo}`
+      : undefined;
 
-      [3, 5].forEach((key) => {
-        console.log(`--- ${key} ---`);
-        for (let i = 0; i < result.sub[0].sub[key].sub.length; i++) {
-          const item0 = result.sub[0].sub[key].sub[i].sub[0].sub[0];
-          const item1 = result.sub[0].sub[key].sub[i].sub[0].sub[1];
-          const code = item0.content().match(reHex)[0].replace(/\n/, '');
-
-          console.log(`${code}: ${item1.content()}`);
-        }
-      });
-
-      // console.dir(item0);
-      // console.log(item0.typeName());
-      // console.log(code);
-
-      // console.dir(item1);
-      // console.log(item1.typeName());
-      // console.dir(item1.content());
-    };
-
-    reader.readAsBinaryString(file);
-  };
-
-  return isAddMode ? (
-    <input type='file' onInput={onFileUpload} />
-  ) : (
+  return (
     <textarea
       className={styles.textArea}
       rows={10}
+      value={value}
       placeholder='Виберіть сертифікат, щоб переглянути інформацію'
     />
   );
