@@ -1,0 +1,16 @@
+.button {
+  align-self: center;
+  padding: 5px 30px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  background-color: #e6e6e6;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+
+.button:active {
+  background-color: #d6d6d6;
+}
