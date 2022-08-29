@@ -14,7 +14,7 @@
 // OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
 (typeof define != 'undefined'
-  ? define
+  ? define // eslint-disable-line no-undef
   : function (factory) {
       'use strict';
       if (typeof module == 'object') module.exports = factory();

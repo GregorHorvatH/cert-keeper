@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 // ASN.1 JavaScript decoder
 // Copyright (c) 2008-2020 Lapo Luchini <lapo@lapo.it>
 

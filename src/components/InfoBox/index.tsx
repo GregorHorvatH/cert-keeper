@@ -20,6 +20,7 @@ const InfoBox: FC<InfoBoxProps> = ({ isAddMode }) => {
       }
       const tbsCertificate = result;
 
+      console.log(certData);
       console.log(tbsCertificate);
     };
 

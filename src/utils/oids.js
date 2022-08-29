@@ -1,3 +1,5 @@
+/* eslint-disable no-undef */
+
 // Converted from: https://www.cs.auckland.ac.nz/~pgut001/dumpasn1.cfg
 // which is made by Peter Gutmann and whose license states:
 //   You can use this code in whatever way you want,
